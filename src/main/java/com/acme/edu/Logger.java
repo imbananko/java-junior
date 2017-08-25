@@ -7,13 +7,34 @@ import java.util.StringJoiner;
 import java.util.stream.IntStream;
 
 public class Logger {
+    IWriter writer;
+    IFormatter formatter;
 
+    public Logger(IWriter writer, IFormatter formatter) {
+        this.writer = writer;
+        this.formatter = formatter;
+    }
+
+    public void log(Object message) {
+        String formatted = formatter.format(message);
+        writer.write(formatted);
+    }
+
+
+
+
+    /*
     private static StringBuilder internalString;
     private static boolean readyForNumber;
     private static int internalSum;
     private static String previousLoggedString;
     private static int counterForEqualString;
     private static boolean accomulationStringMode;
+
+
+
+
+
 
     public static void log(int message) {
         //dropString();
@@ -122,4 +143,5 @@ public class Logger {
         counterForEqualString = 1;
         accomulationStringMode = false;
     }
+    */
 }
