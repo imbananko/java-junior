@@ -1,16 +1,10 @@
 package com.acme.edu;
 
-import com.sun.deploy.util.StringUtils;
-import org.apache.commons.lang3.ArrayUtils;
-
-import java.util.StringJoiner;
-import java.util.stream.IntStream;
-
 public class Logger {
-    IWriter writer;
-    IFormatter formatter;
+    Writer writer;
+    AbstractFormatter formatter;
 
-    public Logger(IWriter writer, IFormatter formatter) {
+    public Logger(Writer writer, AbstractFormatter formatter) {
         this.writer = writer;
         this.formatter = formatter;
     }
