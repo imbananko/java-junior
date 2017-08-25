@@ -1,7 +1,7 @@
 package com.acme.edu.iteration01;
 
-import com.acme.edu.ConsoleWriter;
-import com.acme.edu.TypeFormatter;
+import com.acme.edu.writers.ConsoleWriter;
+import com.acme.edu.formatters.TypeFormatter;
 import com.acme.edu.Logger;
 import com.acme.edu.SysoutCaptureAndAssertionAbility;
 import org.junit.After;

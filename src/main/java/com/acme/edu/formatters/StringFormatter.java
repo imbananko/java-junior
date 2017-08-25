@@ -1,4 +1,4 @@
-package com.acme.edu;
+package com.acme.edu.formatters;
 
 public class StringFormatter extends AbstractFormatter {
     @Override
