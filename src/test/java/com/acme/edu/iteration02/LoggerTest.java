@@ -2,21 +2,24 @@ package com.acme.edu.iteration02;
 
 import com.acme.edu.Logger;
 import com.acme.edu.SysoutCaptureAndAssertionAbility;
+import com.acme.edu.formatters.ConsoleFormatter;
+import com.acme.edu.formatters.TypeFormatter;
+import com.acme.edu.writers.ConsoleWriter;
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
-import sun.rmi.runtime.Log;
 
 import java.io.IOException;
 
 public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     //region given
-    @Before
+    Logger logger;
 
+    @Before
     public void setUpSystemOut() throws IOException {
         resetOut();
         captureSysout();
+        logger = new Logger(new ConsoleWriter(), new ConsoleFormatter());
     }
 
     @After
@@ -28,18 +31,17 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
 
 
     //TODO: implement Logger solution to match specification as tests
-    /*
+
     @Test
 
     public void shouldLogSequentIntegersAsSum() throws IOException {
         //region when
-        Logger.initialize();
-        Logger.log("str 1");
-        Logger.log(1);
-        Logger.log(2);
-        Logger.log("str 2");
-        Logger.log(0);
-        Logger.flush();
+        logger.log("str 1");
+        logger.log(1);
+        logger.log(2);
+        logger.log("str 2");
+        logger.log(0);
+        logger.releaseBuffer();
         //endregion
 
         //region then
@@ -51,7 +53,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         );
         //endregion
     }
-
+/*
     @Test
     public void shouldLogCorrectlyIntegerOverflowWhenSequentIntegers() {
         //region when
