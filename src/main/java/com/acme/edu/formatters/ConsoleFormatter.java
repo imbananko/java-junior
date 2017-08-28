@@ -7,7 +7,13 @@ public class ConsoleFormatter extends AbstractFormatter {
 
     @Override
     public <T> String format(ArrayList<T> buffer) {
-        return buffer.stream().map(Object::toString)
-                .collect(Collectors.joining("\n")) + "\n";
+        String formatted = "";
+        for (T line : buffer) {
+            formatted += line.toString() + '\n';
+        }
+
+        return formatted;
+//        return buffer.stream().map(Object::toString)
+//                .collect(Collectors.joining("\n")) + "\n";
     }
 }
