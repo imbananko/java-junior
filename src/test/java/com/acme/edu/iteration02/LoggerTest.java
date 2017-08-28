@@ -3,7 +3,6 @@ package com.acme.edu.iteration02;
 import com.acme.edu.Logger;
 import com.acme.edu.SysoutCaptureAndAssertionAbility;
 import com.acme.edu.formatters.ConsoleFormatter;
-import com.acme.edu.formatters.TypeFormatter;
 import com.acme.edu.writers.ConsoleWriter;
 import org.junit.After;
 import org.junit.Before;

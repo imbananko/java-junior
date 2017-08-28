@@ -31,7 +31,7 @@ public class Logger {
         if (previousValue instanceof Integer) {
             long sum = ((Integer) previousValue).intValue();
             sum += message;
-
+            // Int overflow case
             if (sum < Integer.MAX_VALUE) {
                 buffer.set(previousIndex, (int) sum);
             } else {
@@ -39,6 +39,7 @@ public class Logger {
                 buffer.add(Integer.MAX_VALUE);
                 previousIndex++;
             }
+            // Int overflow case
         } else {
             buffer.add(message);
             previousIndex++;
@@ -55,7 +56,7 @@ public class Logger {
 
         if (previousValue instanceof Byte) {
             int sum = ((Byte) previousValue).byteValue() + message;
-
+            // Byte overflow case
             if (sum < Byte.MAX_VALUE) {
                 buffer.set(previousIndex, (byte) sum);
             } else {
@@ -63,6 +64,7 @@ public class Logger {
                 buffer.add(Byte.MAX_VALUE);
                 previousIndex++;
             }
+            // Byte overflow case
         } else {
             buffer.add(message);
             previousIndex++;
@@ -70,11 +72,6 @@ public class Logger {
     }
 
     public void log(Character message) {
-        if (buffer.size() == 0) {
-            buffer.add(message);
-            return;
-        }
-
         buffer.add(message);
         previousIndex++;
     }
@@ -104,21 +101,11 @@ public class Logger {
     }
 
     public void log(Boolean message) {
-        if (buffer.size() == 0) {
-            buffer.add(message);
-            return;
-        }
-
         buffer.add(message);
         previousIndex++;
     }
 
     public void log(Object message) {
-        if (buffer.size() == 0) {
-            buffer.add(message);
-            return;
-        }
-
         buffer.add(message);
         previousIndex++;
     }
