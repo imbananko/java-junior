@@ -88,7 +88,8 @@ public class Logger {
         Object previousValue = buffer.get(previousIndex);
 
         if (previousValue instanceof String) {
-            if (previousValue.equals(message)) {
+            String lastString = ((String) previousValue).replace(" (x" + stringMultiplier + ")", "");
+            if (lastString.equals(message)) {
                 buffer.set(previousIndex, String.format(message + " (x%x)", ++stringMultiplier));
             } else {
                 stringMultiplier = 1;
