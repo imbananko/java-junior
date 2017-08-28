@@ -2,6 +2,9 @@ package com.acme.edu.iteration03;
 
 import com.acme.edu.Logger;
 import com.acme.edu.SysoutCaptureAndAssertionAbility;
+import com.acme.edu.formatters.ArrayFormatter;
+import com.acme.edu.formatters.ConsoleFormatter;
+import com.acme.edu.writers.ConsoleWriter;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -10,10 +13,13 @@ import java.io.IOException;
 
 public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     //region given
+    Logger logger;
+
     @Before
     public void setUpSystemOut() throws IOException {
         resetOut();
         captureSysout();
+        logger = new Logger(new ConsoleWriter(), new ArrayFormatter());
     }
 
     @After
@@ -22,12 +28,11 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     }
     //endregion
 
-
-    /*
     @Test
     public void shouldLogIntegersArray() throws IOException {
         //region when
-        Logger.log(new int[] {-1, 0, 1});
+        logger.log(new int[] {-1, 0, 1});
+        logger.releaseBuffer();
         //endregion
 
         //region then

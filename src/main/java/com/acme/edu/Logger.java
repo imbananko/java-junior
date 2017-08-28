@@ -110,6 +110,13 @@ public class Logger {
         previousIndex++;
     }
 
+    public void log(int[] message) {
+        for (Integer i : message) {
+            buffer.add(i);
+            previousIndex++;
+        }
+    }
+
     public void releaseBuffer() {
         Object formattedBuffer = formatter.format(buffer);
         writer.write(formattedBuffer);

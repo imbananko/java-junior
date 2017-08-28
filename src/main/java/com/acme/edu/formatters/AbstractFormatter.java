@@ -4,5 +4,5 @@ import java.util.ArrayList;
 
 public abstract class AbstractFormatter<T> {
     protected String formattedMessage;
-    public abstract T format(ArrayList<T> buffer);
+    public abstract Object format(ArrayList<T> buffer);
 }
