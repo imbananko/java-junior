@@ -6,15 +6,11 @@ import com.acme.edu.writers.ConsoleWriter;
 import com.acme.edu.writers.Writer;
 import org.junit.Test;
 
-import java.util.ArrayList;
-
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
 
 public class LoggerTest {
     @Test
@@ -31,6 +27,74 @@ public class LoggerTest {
         //region then
         assertEquals(1, logger.buffer.size());
         assertTrue(logger.buffer.contains(5));
+        //endregion
+    }
+
+    @Test
+    public void shouldContainMessageAndSizeIncrementedWhenStringLog() {
+        // region given
+        Logger logger = new Logger(new ConsoleWriter(), new ConsoleFormatter());
+        String stringMessage = "String to log";
+        // endregion
+
+        // region act
+        logger.log(stringMessage);
+        // endregion
+
+        //region then
+        assertEquals(1, logger.buffer.size());
+        assertTrue(logger.buffer.contains("String to log"));
+        //endregion
+    }
+
+    @Test
+    public void shouldContainMessageAndSizeIncrementedWhenBooleanLog() {
+        // region given
+        Logger logger = new Logger(new ConsoleWriter(), new ConsoleFormatter());
+        Boolean booleanMessage = true;
+        // endregion
+
+        // region act
+        logger.log(booleanMessage);
+        // endregion
+
+        //region then
+        assertEquals(1, logger.buffer.size());
+        assertTrue(logger.buffer.contains(true));
+        //endregion
+    }
+
+    @Test
+    public void shouldContainMessageAndSizeIncrementedWhenObjectLog() {
+        // region given
+        Logger logger = new Logger(new ConsoleWriter(), new ConsoleFormatter());
+        Object objectMessage = new Object();
+        // endregion
+
+        // region act
+        logger.log(objectMessage);
+        // endregion
+
+        //region then
+        assertEquals(1, logger.buffer.size());
+        assertTrue(logger.buffer.contains(objectMessage));
+        //endregion
+    }
+
+    @Test
+    public void shouldContainMessageAndSizeIncrementedWhenByteLog() {
+        // region given
+        Logger logger = new Logger(new ConsoleWriter(), new ConsoleFormatter());
+        Byte byteMessage = 2;
+        // endregion
+
+        // region act
+        logger.log(byteMessage);
+        // endregion
+
+        //region then
+        assertEquals(1, logger.buffer.size());
+        assertTrue(logger.buffer.contains(byteMessage));
         //endregion
     }
 
