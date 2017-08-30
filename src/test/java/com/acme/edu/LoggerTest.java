@@ -6,19 +6,16 @@ import com.acme.edu.writers.ConsoleWriter;
 import com.acme.edu.writers.Writer;
 import org.junit.Before;
 import org.junit.Test;
-
 import java.util.ArrayList;
 
+import static org.fest.assertions.Assertions.assertThat;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
-import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.anyInt;
 import static org.mockito.Matchers.anyObject;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
 
-public class LoggerTest {
+public class LoggerTest implements SysoutCaptureAndAssertionAbility {
 
     Writer mockedWriter;
     AbstractFormatter mockedFormatter;
@@ -29,6 +26,8 @@ public class LoggerTest {
         mockedWriter = mock(Writer.class);
         mockedFormatter = mock(AbstractFormatter.class);
         logger = new Logger(mockedWriter, mockedFormatter);
+        resetOut();
+        captureSysout();
     }
 
     @Test
@@ -290,6 +289,21 @@ public class LoggerTest {
 
         //region then
         assertEquals(formatted, "5\n2\n" );
+        //endregion
+    }
+
+    @Test
+    public void shouldWriteToConsoleWhenWrite() {
+        // region given
+        Writer writer = new ConsoleWriter();
+        // endregion
+
+        // region act
+        writer.write("Tested");
+        // endregion
+
+        //region then
+        assertSysoutContains("Tested");
         //endregion
     }
 }
