@@ -9,8 +9,10 @@ import org.junit.Test;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Matchers.any;
+import static org.mockito.Matchers.anyObject;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 public class LoggerTest {
     @Test
@@ -112,31 +114,10 @@ public class LoggerTest {
         // endregion
 
         //region then
-        verify(mockedFormatter).format(any());
-        verify(mockedWriter).write(any());
+        verify(mockedFormatter).format(anyObject());
+        verify(mockedWriter).write(anyObject());
         //endregion
     }
-
-//    @Test
-//    public void shouldFormatIncomeObjectOnRelease() {
-//        // region given
-//        Writer mockedWriter = mock(Writer.class);
-//        AbstractFormatter mockedFormatter = mock(AbstractFormatter.class);
-//        when(mockedFormatter.format(any())).thenReturn("Formatted");
-//        when(mockedWriter.write(any())).then()
-//
-//        Logger logger = new Logger(mockedWriter, mockedFormatter);
-//        // endregion
-
-//        // region act
-//        logger.releaseBuffer();
-//        // endregion
-
-//        //region then
-//        verify(mockedFormatter).format(any());
-//        verify(mockedWriter).write(any());
-//        //endregion
-//    }
 }
 
 
