@@ -21,7 +21,7 @@ public class Logger {
     }
 
     public void log(Integer message) {
-        if (tryToAddfirstElement(message)) return;
+        if (tryToAddFirstElement(message)) return;
 
         Object previousValue = buffer.get(previousIndex);
 
@@ -44,7 +44,7 @@ public class Logger {
     }
 
     public void log(Byte message) {
-        if (tryToAddfirstElement(message)) return;
+        if (tryToAddFirstElement(message)) return;
 
         Object previousValue = buffer.get(previousIndex);
 
@@ -71,7 +71,7 @@ public class Logger {
     }
 
     public void log(String message) {
-        if (tryToAddfirstElement(message)) return;
+        if (tryToAddFirstElement(message)) return;
 
         Object previousValue = buffer.get(previousIndex);
 
@@ -113,7 +113,7 @@ public class Logger {
         writer.write(formattedBuffer);
     }
 
-    private boolean tryToAddfirstElement(Object message) {
+    private boolean tryToAddFirstElement(Object message) {
         if (buffer.size() == 0) {
             buffer.add(message);
             return true;
