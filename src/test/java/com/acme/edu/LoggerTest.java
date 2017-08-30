@@ -217,46 +217,7 @@ public class LoggerTest {
         //endregion
     }
 
-    @Test
-    public void shouldCorrectHandleMaxValueWhenIntegerLog() {
-        // region given
-        int intToLog = 1111;
-        int overValue = Integer.MAX_VALUE - 50;
 
-        int firstIntToCheck = (intToLog + overValue) % Integer.MAX_VALUE;
-        int secondIntToCheck = Integer.MAX_VALUE;
-        // endregion
-
-        // region act
-        logger.log(intToLog);
-        logger.log(secondIntToCheck);
-        // endregion
-
-        //region then
-        assertEquals(2, logger.buffer.size());
-        assertTrue(logger.buffer.contains(5));
-        assertTrue(logger.buffer.contains(Integer.MAX_VALUE - 5));
-        //endregion
-    }
-
-    @Test
-    public void shouldCorrectHandleMaxValueWhenByteLog() {
-        // region given
-        //byte byteToLog = 10;
-        //byte maxValue = Byte.MAX_VALUE - 5;
-        //// endregion
-//
-        //// region act
-        //logger.log(intToLog);
-        //logger.log(maxValue);
-        //// endregion
-//
-        ////region then
-        //assertEquals(2, logger.buffer.size());
-        //assertTrue(logger.buffer.contains(5));
-        //assertTrue(logger.buffer.contains(Integer.MAX_VALUE - 5));
-        //endregion
-    }
 }
 
 
