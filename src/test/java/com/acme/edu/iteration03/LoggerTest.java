@@ -2,7 +2,6 @@ package com.acme.edu.iteration03;
 
 import com.acme.edu.Logger;
 import com.acme.edu.SysoutCaptureAndAssertionAbility;
-import com.acme.edu.formatters.ArrayFormatter;
 import com.acme.edu.formatters.ConsoleFormatter;
 import com.acme.edu.writers.ConsoleWriter;
 import org.junit.After;
@@ -20,7 +19,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     public void setUpSystemOut() throws IOException {
         resetOut();
         captureSysout();
-        logger = new Logger(new ConsoleWriter(), new ArrayFormatter());
+        logger = new Logger(new ConsoleWriter(), new ConsoleFormatter());
     }
 
     @After
