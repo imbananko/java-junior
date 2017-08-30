@@ -32,7 +32,7 @@ public class Logger {
             if (sum < Integer.MAX_VALUE) {
                 buffer.set(previousIndex, (int) sum);
             } else {
-                buffer.set(previousIndex, sum % Integer.MAX_VALUE);
+                buffer.set(previousIndex, (int) (sum % Integer.MAX_VALUE));
                 buffer.add(Integer.MAX_VALUE);
                 previousIndex++;
             }
@@ -54,7 +54,7 @@ public class Logger {
             if (sum < Byte.MAX_VALUE) {
                 buffer.set(previousIndex, (byte) sum);
             } else {
-                buffer.set(previousIndex, sum % Byte.MAX_VALUE);
+                buffer.set(previousIndex, (byte) (sum % Byte.MAX_VALUE));
                 buffer.add(Byte.MAX_VALUE);
                 previousIndex++;
             }

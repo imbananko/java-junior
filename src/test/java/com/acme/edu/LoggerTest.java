@@ -217,7 +217,62 @@ public class LoggerTest {
         //endregion
     }
 
+    @Test
+    public void shouldOverflowCorrectlyWhenIntegerLog() {
+        // region given
+        int intToLog = 1000;
+        int bigInt = Integer.MAX_VALUE - 300;
+        // endregion
 
+        // region act
+        logger.log(intToLog);
+        logger.log(bigInt);
+        // endregion
+
+        //region then
+        assertEquals(2, logger.buffer.size());
+        assertTrue(logger.buffer.contains(700));
+        assertTrue(logger.buffer.contains(Integer.MAX_VALUE));
+        //endregion
+    }
+
+    @Test
+    public void shouldOverflowCorrectlyWhenByteLog() {
+        // region given
+        byte byteToLog = 40;
+        byte bigByte = Byte.MAX_VALUE - 30;
+        // endregion
+
+        // region act
+        logger.log(byteToLog);
+        logger.log(bigByte);
+        // endregion
+
+        //region then
+        assertEquals(2, logger.buffer.size());
+        assertTrue(logger.buffer.contains((byte)10));
+        assertTrue(logger.buffer.contains(Byte.MAX_VALUE));
+        //endregion
+    }
+
+    @Test
+    public void shouldNotAddMultiplierWhenSameStringLog() {
+        // region given
+        String stringToLog1 = "string1";
+        String stringToLog2 = "string2";
+        // endregion
+
+        // region act
+        logger.log(stringToLog1);
+        logger.log(stringToLog2);
+        // endregion
+
+        //region then
+        assertEquals(2, logger.buffer.size());
+        assertTrue(logger.buffer.contains("string1"));
+        assertTrue(logger.buffer.contains("string2"));
+        //endregion
+    }
 }
 
 
