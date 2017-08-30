@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Matchers.any;
+import static org.mockito.Matchers.anyInt;
 import static org.mockito.Matchers.anyObject;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
@@ -271,6 +272,24 @@ public class LoggerTest {
         assertEquals(2, logger.buffer.size());
         assertTrue(logger.buffer.contains("string1"));
         assertTrue(logger.buffer.contains("string2"));
+        //endregion
+    }
+
+    @Test
+    public void shouldReturnFormattedObjectWhenFormat() {
+        // region given
+        AbstractFormatter formatter = new ConsoleFormatter();
+        ArrayList<Integer> list = new ArrayList<>();
+        list.add(5);
+        list.add(2);
+        // endregion
+
+        // region act
+        String formatted = formatter.format(list).toString();
+        // endregion
+
+        //region then
+        assertEquals(formatted, "5\n2\n" );
         //endregion
     }
 }
