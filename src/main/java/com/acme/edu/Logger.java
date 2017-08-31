@@ -5,6 +5,8 @@ import com.acme.edu.writers.Writer;
 
 import java.util.ArrayList;
 
+
+//Want to commit
 public class Logger {
     ArrayList<Object> buffer = new ArrayList<>();
     int previousIndex;
