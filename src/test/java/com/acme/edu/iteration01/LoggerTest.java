@@ -1,6 +1,8 @@
 package com.acme.edu.iteration01;
 
-import com.acme.edu.Logger;
+import com.acme.edu.Context;
+import com.acme.edu.EventHandler;
+import com.acme.edu.FormattingSavingHandler;
 import com.acme.edu.SysoutCaptureAndAssertionAbility;
 import com.acme.edu.formatters.ConsoleFormatter;
 import com.acme.edu.writers.ConsoleWriter;
@@ -12,13 +14,15 @@ import org.junit.Test;
 import java.io.IOException;
 
 public class LoggerTest implements SysoutCaptureAndAssertionAbility {
+
+    Context context;
     //region given
-    Logger logger;
+    FormattingSavingHandler formattingSavingHandler;
     @Before
     public void setUpSystemOut() throws IOException {
         resetOut();
         captureSysout();
-        logger = new Logger(new ConsoleWriter(), new ConsoleFormatter());
+        context = new Context(new FormattingSavingHandler(null,null));
     }
 
     @After
@@ -30,10 +34,10 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     @Test @Ignore
     public void shouldLogInteger() throws IOException {
         //region when
-        logger.log(1);
-        logger.log(0);
-        logger.log(-1);
-        logger.releaseBuffer();
+        context.logEvent(1);
+        context.logEvent(0);
+        context.logEvent(-1);
+        context.releaseBuffer();
         //endregion
 
         //region then
@@ -44,10 +48,10 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     @Test @Ignore
     public void shouldLogByte() throws IOException {
         //region when
-        logger.log((byte)1);
-        logger.log((byte)0);
-        logger.log((byte)-1);
-        logger.releaseBuffer();
+        context.logEvent((byte)1);
+        context.logEvent((byte)0);
+        context.logEvent((byte)-1);
+        context.releaseBuffer();
         //endregion
 
         //region then
@@ -58,9 +62,9 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     @Test @Ignore
     public void shouldLogChar() throws IOException {
         //region when
-        logger.log('a');
-        logger.log('b');
-        logger.releaseBuffer();
+        context.logEvent('a');
+        context.logEvent('b');
+        context.releaseBuffer();
         //endregion
 
         //region then
@@ -72,9 +76,9 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     @Test @Ignore
     public void shouldLogString() throws IOException {
         //region when
-        logger.log("test string 1");
-        logger.log("other str");
-        logger.releaseBuffer();
+        context.logEvent("test string 1");
+        context.logEvent("other str");
+        context.releaseBuffer();
         //endregion
 
         //region then
@@ -86,9 +90,9 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     @Test @Ignore
     public void shouldLogBoolean() throws IOException {
         //region when
-        logger.log(true);
-        logger.log(false);
-        logger.releaseBuffer();
+        context.logEvent(true);
+        context.logEvent(false);
+        context.releaseBuffer();
         //endregion
 
         //region then
@@ -100,8 +104,8 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     @Test @Ignore
     public void shouldLogReference() throws IOException {
         //region when
-        logger.log(new Object());
-        logger.releaseBuffer();
+        context.logEvent(new Object());
+        context.releaseBuffer();
         //endregion
 
         //region then

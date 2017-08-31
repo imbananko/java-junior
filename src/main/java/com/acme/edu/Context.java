@@ -10,15 +10,7 @@ import static java.util.Arrays.asList;
  */
 
 //@FunctionalInterface
- interface EventHandler {
-    void handleEvent(String msg);
-    void handleEvent(Integer msg);
-    void handleEvent(Byte msg);
-    void handleEvent(Boolean msg);
-    void handleEvent(Character msg);
-    void handleEvent(Object msg);
 
-}
 
 
 public class Context {
@@ -28,23 +20,26 @@ public class Context {
     }
 
     public void logEvent(String msg) {
-        handlers.forEach(handleEvent);
+        handlers.forEach(h -> h.handleEvent(msg));
     }
     public void logEvent(Integer msg) {
-        handlers.forEach(EventHandler::handleEvent(msg));
+        handlers.forEach(h -> h.handleEvent(msg));
     }
     public void logEvent(Byte msg) {
-        handlers.forEach(EventHandler::handleEvent(msg));
+        handlers.forEach(h -> h.handleEvent(msg));
     }
     public void logEvent(Boolean msg) {
-        handlers.forEach(EventHandler::handleEvent(msg));
+        handlers.forEach(h -> h.handleEvent(msg));
     }
     public void logEvent(Character msg) {
-        handlers.forEach(EventHandler::handleEvent(msg));
+        handlers.forEach(h -> h.handleEvent(msg));
     }
     public void logEvent(Object msg) {
-        handlers.forEach(EventHandler::handleEvent(msg));
+        handlers.forEach(h -> h.handleEvent(msg));
+    }
+    public void releaseBuffer() {
+        handlers.forEach(h -> h.releaseBuffer());
     }
 
-
 }
+

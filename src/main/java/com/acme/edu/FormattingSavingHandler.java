@@ -3,11 +3,13 @@ package com.acme.edu;
 import com.acme.edu.formatters.AbstractFormatter;
 import com.acme.edu.writers.Writer;
 
+//import java.beans.EventHandler;
 import java.util.ArrayList;
+import java.util.EventListener;
+import java.util.List;
 
 
-//Want to commit2
-public class Logger {
+public class FormattingSavingHandler implements EventHandler {
     ArrayList<Object> buffer = new ArrayList<>();
     int previousIndex;
     int stringMultiplier;
@@ -15,12 +17,13 @@ public class Logger {
     Writer writer;
     AbstractFormatter formatter;
 
-    public Logger(Writer writer, AbstractFormatter formatter) {
+    public FormattingSavingHandler(Writer writer, AbstractFormatter formatter) {
         this.writer = writer;
         this.formatter = formatter;
         previousIndex = 0;
         stringMultiplier = 1;
     }
+
 
     public void log(Integer message) {
         if (tryToAddFirstElement(message)) return;
@@ -121,5 +124,35 @@ public class Logger {
             return true;
         }
         return false;
+    }
+
+    @Override
+    public void handleEvent(String msg) {
+        log(msg);
+    }
+
+    @Override
+    public void handleEvent(Integer msg) {
+        log(msg);
+    }
+
+    @Override
+    public void handleEvent(Byte msg) {
+        log(msg);
+    }
+
+    @Override
+    public void handleEvent(Boolean msg) {
+        log(msg);
+    }
+
+    @Override
+    public void handleEvent(Character msg) {
+        log(msg);
+    }
+
+    @Override
+    public void handleEvent(Object msg) {
+        log(msg);
     }
 }

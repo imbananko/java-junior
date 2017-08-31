@@ -15,17 +15,17 @@ import static org.mockito.Matchers.anyObject;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 
-public class LoggerTest implements SysoutCaptureAndAssertionAbility {
+public class contextTest implements SysoutCaptureAndAssertionAbility {
 
     Writer mockedWriter;
     AbstractFormatter mockedFormatter;
-    Logger logger;
+    Context context;
 
     @Before
     public void setUp() {
         mockedWriter = mock(Writer.class);
         mockedFormatter = mock(AbstractFormatter.class);
-        logger = new Logger(mockedWriter, mockedFormatter);
+        context = new context(mockedWriter, mockedFormatter);
         resetOut();
         captureSysout();
     }
@@ -37,12 +37,12 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         // endregion
 
         // region act
-        logger.log(intMessage);
+        context.logEvent(intMessage);
         // endregion
 
         //region then
-        assertEquals(1, logger.buffer.size());
-        assertTrue(logger.buffer.contains(5));
+        assertEquals(1, context.buffer.size());
+        assertTrue(context.buffer.contains(5));
         //endregion
     }
 
@@ -53,12 +53,12 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         // endregion
 
         // region act
-        logger.log(stringMessage);
+        context.logEvent(stringMessage);
         // endregion
 
         //region then
-        assertEquals(1, logger.buffer.size());
-        assertTrue(logger.buffer.contains("String to log"));
+        assertEquals(1, context.buffer.size());
+        assertTrue(context.buffer.contains("String to log"));
         //endregion
     }
 
@@ -69,12 +69,12 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         // endregion
 
         // region act
-        logger.log(booleanMessage);
+        context.logEvent(booleanMessage);
         // endregion
 
         //region then
-        assertEquals(1, logger.buffer.size());
-        assertTrue(logger.buffer.contains(true));
+        assertEquals(1, context.buffer.size());
+        assertTrue(context.buffer.contains(true));
         //endregion
     }
 
@@ -85,12 +85,12 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         // endregion
 
         // region act
-        logger.log(objectMessage);
+        context.logEvent(objectMessage);
         // endregion
 
         //region then
-        assertEquals(1, logger.buffer.size());
-        assertTrue(logger.buffer.contains(objectMessage));
+        assertEquals(1, context.buffer.size());
+        assertTrue(context.buffer.contains(objectMessage));
         //endregion
     }
 
@@ -101,12 +101,12 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         // endregion
 
         // region act
-        logger.log(byteMessage);
+        context.logEvent(byteMessage);
         // endregion
 
         //region then
-        assertEquals(1, logger.buffer.size());
-        assertTrue(logger.buffer.contains(byteMessage));
+        assertEquals(1, context.buffer.size());
+        assertTrue(context.buffer.contains(byteMessage));
         //endregion
     }
 
@@ -117,14 +117,14 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         // endregion
 
         // region act
-        logger.log(arrayMessage);
+        context.logEvent(arrayMessage);
         // endregion
 
         //region then
-        assertEquals(3, logger.buffer.size());
-        assertTrue(logger.buffer.contains(1));
-        assertTrue(logger.buffer.contains(2));
-        assertTrue(logger.buffer.contains(3));
+        assertEquals(3, context.buffer.size());
+        assertTrue(context.buffer.contains(1));
+        assertTrue(context.buffer.contains(2));
+        assertTrue(context.buffer.contains(3));
         //endregion
     }
 
@@ -135,19 +135,19 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         // endregion
 
         // region act
-        logger.log(charMessage);
+        context.logEvent(charMessage);
         // endregion
 
         //region then
-        assertEquals(1, logger.buffer.size());
-        assertTrue(logger.buffer.contains('c'));
+        assertEquals(1, context.buffer.size());
+        assertTrue(context.buffer.contains('c'));
         //endregion
     }
 
     @Test
     public void shouldCallFormatAndWriteOnRelease() {
         // region act
-        logger.releaseBuffer();
+        context.releaseBuffer();
         // endregion
 
         //region then
@@ -166,14 +166,14 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         // endregion
 
         // region act
-        logger.log(integerToSum1);
-        logger.log(integerToSum2);
-        logger.log(integerToSum3);
+        context.logEvent(integerToSum1);
+        context.logEvent(integerToSum2);
+        context.logEvent(integerToSum3);
         // endregion
 
         //region then
-        assertEquals(1, logger.buffer.size());
-        assertTrue(logger.buffer.contains(sum));
+        assertEquals(1, context.buffer.size());
+        assertTrue(context.buffer.contains(sum));
         //endregion
     }
 
@@ -187,14 +187,14 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         // endregion
 
         // region act
-        logger.log(byteToSum1);
-        logger.log(byteToSum2);
-        logger.log(byteToSum3);
+        context.logEvent(byteToSum1);
+        context.logEvent(byteToSum2);
+        context.logEvent(byteToSum3);
         // endregion
 
         //region then
-        assertEquals(1, logger.buffer.size());
-        assertTrue(logger.buffer.contains(sum));
+        assertEquals(1, context.buffer.size());
+        assertTrue(context.buffer.contains(sum));
         //endregion
     }
 
@@ -207,13 +207,13 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         // endregion
 
         // region act
-        logger.log(stringToLog1);
-        logger.log(stringToLog2);
+        context.logEvent(stringToLog1);
+        context.logEvent(stringToLog2);
         // endregion
 
         //region then
-        assertEquals(1, logger.buffer.size());
-        assertTrue(logger.buffer.contains(result));
+        assertEquals(1, context.buffer.size());
+        assertTrue(context.buffer.contains(result));
         //endregion
     }
 
@@ -225,14 +225,14 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         // endregion
 
         // region act
-        logger.log(intToLog);
-        logger.log(bigInt);
+        context.logEvent(intToLog);
+        context.logEvent(bigInt);
         // endregion
 
         //region then
-        assertEquals(2, logger.buffer.size());
-        assertTrue(logger.buffer.contains(700));
-        assertTrue(logger.buffer.contains(Integer.MAX_VALUE));
+        assertEquals(2, context.buffer.size());
+        assertTrue(context.buffer.contains(700));
+        assertTrue(context.buffer.contains(Integer.MAX_VALUE));
         //endregion
     }
 
@@ -244,14 +244,14 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         // endregion
 
         // region act
-        logger.log(byteToLog);
-        logger.log(bigByte);
+        context.logEvent(byteToLog);
+        context.logEvent(bigByte);
         // endregion
 
         //region then
-        assertEquals(2, logger.buffer.size());
-        assertTrue(logger.buffer.contains((byte)10));
-        assertTrue(logger.buffer.contains(Byte.MAX_VALUE));
+        assertEquals(2, context.buffer.size());
+        assertTrue(context.buffer.contains((byte)10));
+        assertTrue(context.buffer.contains(Byte.MAX_VALUE));
         //endregion
     }
 
@@ -263,14 +263,14 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         // endregion
 
         // region act
-        logger.log(stringToLog1);
-        logger.log(stringToLog2);
+        context.logEvent(stringToLog1);
+        context.logEvent(stringToLog2);
         // endregion
 
         //region then
-        assertEquals(2, logger.buffer.size());
-        assertTrue(logger.buffer.contains("string1"));
-        assertTrue(logger.buffer.contains("string2"));
+        assertEquals(2, context.buffer.size());
+        assertTrue(context.buffer.contains("string1"));
+        assertTrue(context.buffer.contains("string2"));
         //endregion
     }
 

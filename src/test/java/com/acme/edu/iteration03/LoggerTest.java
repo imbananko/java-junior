@@ -1,47 +1,47 @@
-package com.acme.edu.iteration03;
-
-import com.acme.edu.Logger;
-import com.acme.edu.SysoutCaptureAndAssertionAbility;
-import com.acme.edu.formatters.ConsoleFormatter;
-import com.acme.edu.writers.ConsoleWriter;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Ignore;
-import org.junit.Test;
-
-import java.io.IOException;
-
-public class LoggerTest implements SysoutCaptureAndAssertionAbility {
-    //region given
-    Logger logger;
-
-    @Before
-    public void setUpSystemOut() throws IOException {
-        resetOut();
-        captureSysout();
-        logger = new Logger(new ConsoleWriter(), new ConsoleFormatter());
-    }
-
-    @After
-    public void tearDown() {
-        resetOut();
-    }
-    //endregion
-
-    @Test @Ignore
-    public void shouldLogIntegersArray() throws IOException {
-        //region when
-        logger.log(new int[] {-1, 0, 1});
-        logger.releaseBuffer();
-        //endregion
-
-        //region then
-        assertSysoutEquals(
-            "primitives array: {-1, 0, 1}\n"
-        );
-        //endregion
-    }
-
+//package com.acme.edu.iteration03;
+//
+//import com.acme.edu.Logger;
+//import com.acme.edu.SysoutCaptureAndAssertionAbility;
+//import com.acme.edu.formatters.ConsoleFormatter;
+//import com.acme.edu.writers.ConsoleWriter;
+//import org.junit.After;
+//import org.junit.Before;
+//import org.junit.Ignore;
+//import org.junit.Test;
+//
+//import java.io.IOException;
+//
+//public class LoggerTest implements SysoutCaptureAndAssertionAbility {
+//    //region given
+//    Logger logger;
+//
+//    @Before
+//    public void setUpSystemOut() throws IOException {
+//        resetOut();
+//        captureSysout();
+//        logger = new Logger(new ConsoleWriter(), new ConsoleFormatter());
+//    }
+//
+//    @After
+//    public void tearDown() {
+//        resetOut();
+//    }
+//    //endregion
+//
+//    @Test @Ignore
+//    public void shouldLogIntegersArray() throws IOException {
+//        //region when
+//        logger.log(new int[] {-1, 0, 1});
+//        logger.releaseBuffer();
+//        //endregion
+//
+//        //region then
+//        assertSysoutEquals(
+//            "primitives array: {-1, 0, 1}\n"
+//        );
+//        //endregion
+//    }
+//
     /*
     TODO: implement Logger solution to match specification as tests
 
@@ -119,4 +119,4 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     }
 
     */
-}
+//}
