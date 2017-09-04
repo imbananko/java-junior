@@ -35,7 +35,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     @Test
     public void shouldContainMessageAndSizeIncrementedWhenIntegerLog() {
         // region given
-        int intMessage = 5;
+        int intMessage = Byte.MAX_VALUE + 10;
         // endregion
 
         // region act
@@ -44,7 +44,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
 
         //region then
         assertEquals(1, formattingSavingHandler.getBuffer().size());
-        assertTrue(formattingSavingHandler.getBuffer().contains(5));
+        assertTrue(formattingSavingHandler.getBuffer().contains(intMessage));
         //endregion
     }
 
@@ -99,7 +99,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     @Test
     public void shouldContainMessageAndSizeIncrementedWhenByteLog() {
         // region given
-        Byte byteMessage = 2;
+        Byte byteMessage = Byte.MAX_VALUE - 10;
         // endregion
 
         // region act
@@ -161,9 +161,9 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     @Test
     public void shouldSumIntegersWhenLog() {
         // region given
-        int integerToSum1 = 1000;
-        int integerToSum2 = 2000;
-        int integerToSum3 = 3000;
+        int integerToSum1 = Byte.MAX_VALUE + 1000;
+        int integerToSum2 = Byte.MAX_VALUE + 2000;
+        int integerToSum3 = Byte.MAX_VALUE + 3000;
         int sum = integerToSum1 + integerToSum2 + integerToSum3;
         // endregion
 
