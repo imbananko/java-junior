@@ -13,9 +13,11 @@ import java.util.ArrayList;
 import static org.fest.assertions.Assertions.assertThat;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
+import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyObject;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 public class LoggerTest implements SysoutCaptureAndAssertionAbility {
 
@@ -319,4 +321,32 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         assertSysoutContains("Tested");
         //endregion
     }
+
+    @Test (expected = FormatterException.class)
+    public void shouldThrowFormatterExceptionWhenFormatNullBuffer() throws FormatterException {
+        //region given
+        ConsoleFormatter mockedConsoleFormatter = mock(ConsoleFormatter.class);
+        when(mockedConsoleFormatter.format(any())).thenCallRealMethod();
+        //endregion
+
+        //region act
+        mockedConsoleFormatter.format(null);
+        //endregion
+
+    }
+
+    @Test (expected = FormatterException.class)
+    public void shouldThrowFormatterExceptionWhenFormatEmptyBuffer() throws FormatterException {
+        //region given
+        ConsoleFormatter mockedConsoleFormatter = mock(ConsoleFormatter.class);
+        when(mockedConsoleFormatter.format(any())).thenCallRealMethod();
+        //endregion
+
+        //region act
+        mockedConsoleFormatter.format(new ArrayList<Object>());
+        //endregion
+
+    }
+    
+
 }
