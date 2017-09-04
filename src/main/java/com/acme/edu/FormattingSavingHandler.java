@@ -23,8 +23,8 @@ public class FormattingSavingHandler implements EventHandler {
         stringMultiplier = 1;
     }
 
-
-    public void log(Integer message) {
+    @Override
+    public void handleEvent(Integer message) {
         if (tryToAddFirstElement(message)) return;
 
         Object previousValue = buffer.get(previousIndex);
@@ -47,7 +47,8 @@ public class FormattingSavingHandler implements EventHandler {
         }
     }
 
-    public void log(Byte message) {
+    @Override
+    public void handleEvent(Byte message) {
         if (tryToAddFirstElement(message)) return;
 
         Object previousValue = buffer.get(previousIndex);
@@ -69,12 +70,14 @@ public class FormattingSavingHandler implements EventHandler {
         }
     }
 
-    public void log(Character message) {
+    @Override
+    public void handleEvent(Character message) {
         buffer.add(message);
         previousIndex++;
     }
 
-    public void log(String message) {
+    @Override
+    public void handleEvent(String message) {
         if (tryToAddFirstElement(message)) return;
 
         Object previousValue = buffer.get(previousIndex);
@@ -95,17 +98,20 @@ public class FormattingSavingHandler implements EventHandler {
         }
     }
 
-    public void log(Boolean message) {
+    @Override
+    public void handleEvent(Boolean message) {
         buffer.add(message);
         previousIndex++;
     }
 
-    public void log(Object message) {
+    @Override
+    public void handleEvent(Object message) {
         buffer.add(message);
         previousIndex++;
     }
 
-    public void log(int[] message) {
+    @Override
+    public void handleEvent(int[] message) {
         for (Integer i : message) {
             buffer.add(i);
             previousIndex++;
@@ -128,40 +134,5 @@ public class FormattingSavingHandler implements EventHandler {
             return true;
         }
         return false;
-    }
-
-    @Override
-    public void handleEvent(String msg) {
-        log(msg);
-    }
-
-    @Override
-    public void handleEvent(Integer msg) {
-        log(msg);
-    }
-
-    @Override
-    public void handleEvent(Byte msg) {
-        log(msg);
-    }
-
-    @Override
-    public void handleEvent(Boolean msg) {
-        log(msg);
-    }
-
-    @Override
-    public void handleEvent(Character msg) {
-        log(msg);
-    }
-
-    @Override
-    public void handleEvent(Object msg) {
-        log(msg);
-    }
-
-    @Override
-    public void handleEvent(int[] msg) {
-        log(msg);
     }
 }
