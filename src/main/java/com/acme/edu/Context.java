@@ -1,21 +1,12 @@
 package com.acme.edu;
 
-
 import java.util.ArrayList;
 import java.util.List;
 
 import static java.util.Arrays.asList;
 
-/**
- * Created by eugene on 31/08/17.
- */
-
-//@FunctionalInterface
-
-
-
 public class Context {
-    private List<EventHandler> handlers = new ArrayList<EventHandler>();
+    private List<EventHandler> handlers = new ArrayList<>();
     public Context(EventHandler... handlers) {
         this.handlers.addAll(asList(handlers));
     }
@@ -44,6 +35,5 @@ public class Context {
     public void releaseBuffer() {
         handlers.forEach(h -> h.releaseBuffer());
     }
-
 }
 

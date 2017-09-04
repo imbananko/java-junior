@@ -290,7 +290,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         // endregion
 
         //region then
-        assertEquals(formatted, "5\n2\n" );
+        assertEquals(formatted, "5\n2" );
         //endregion
     }
 

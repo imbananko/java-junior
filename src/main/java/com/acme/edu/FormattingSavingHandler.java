@@ -129,9 +129,13 @@ public class FormattingSavingHandler implements EventHandler {
     }
 
     private boolean tryToAddFirstElement(Object message) {
-        if (buffer.size() == 0) {
-            buffer.add(message);
-            return true;
+        try {
+            if (buffer.size() == 0) {
+                buffer.add(message);
+                return true;
+            }
+        } catch (NullPointerException e) {
+            e.printStackTrace();
         }
         return false;
     }
