@@ -28,7 +28,6 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         mockedFormatter = mock(AbstractFormatter.class);
         formattingSavingHandler = new FormattingSavingHandler(mockedWriter, mockedFormatter);
         context = new Context(formattingSavingHandler);
-
     }
 
     @Test

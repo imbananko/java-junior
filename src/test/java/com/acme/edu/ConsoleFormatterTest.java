@@ -38,7 +38,6 @@ public class ConsoleFormatterTest {
         //region act
         mockedConsoleFormatter.format(new ArrayList<>());
         //endregion
-
     }
 
     @Test
@@ -59,7 +58,7 @@ public class ConsoleFormatterTest {
         // endregion
 
         //region then
-        assertEquals(formatted, "5\n2");
+        assertEquals("5\n2", formatted);
         //endregion
     }
 
@@ -81,8 +80,8 @@ public class ConsoleFormatterTest {
         //endregion
 
         //region then
-        assertEquals(message, "Cannot format empty buffer");
-        assertEquals(buffer, new ArrayList<>());
+        assertEquals("Cannot format empty buffer", message);
+        assertEquals(new ArrayList<>(), buffer);
         //endregion
 
     }
@@ -105,8 +104,8 @@ public class ConsoleFormatterTest {
         //endregion
 
         //region then
-        assertEquals(message, "Buffer cannot be null");
-        assertEquals(buffer, null);
+        assertEquals("Buffer cannot be null", message);
+        assertEquals(null, buffer);
         //endregion
 
     }
