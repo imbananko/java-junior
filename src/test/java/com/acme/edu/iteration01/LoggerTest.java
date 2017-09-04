@@ -1,11 +1,8 @@
 package com.acme.edu.iteration01;
 
 import com.acme.edu.Context;
-import com.acme.edu.EventHandler;
-import com.acme.edu.FormattingSavingHandler;
+import com.acme.edu.handlers.FormattingSavingHandler;
 import com.acme.edu.SysoutCaptureAndAssertionAbility;
-import com.acme.edu.formatters.ConsoleFormatter;
-import com.acme.edu.writers.ConsoleWriter;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Ignore;

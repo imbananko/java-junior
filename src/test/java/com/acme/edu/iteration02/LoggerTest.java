@@ -1,7 +1,6 @@
 //package com.acme.edu.iteration02;
 //
 //import com.acme.edu.Context;
-//import com.acme.edu.FormattingSavingHandler;
 //import com.acme.edu.SysoutCaptureAndAssertionAbility;
 //import com.acme.edu.formatters.ConsoleFormatter;
 //import com.acme.edu.writers.ConsoleWriter;

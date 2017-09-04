@@ -1,5 +1,7 @@
 package com.acme.edu;
 
+import com.acme.edu.handlers.EventHandler;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,6 +34,7 @@ public class Context {
     public void logEvent(Object msg) {
         handlers.forEach(h -> h.handleEvent(msg));
     }
+
     public void releaseBuffer() {
         handlers.forEach(h -> h.releaseBuffer());
     }

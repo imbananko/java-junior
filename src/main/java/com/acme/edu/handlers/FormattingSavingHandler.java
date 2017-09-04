@@ -1,12 +1,11 @@
-package com.acme.edu;
+package com.acme.edu.handlers;
 
+import com.acme.edu.exceptions.FormatterException;
 import com.acme.edu.formatters.AbstractFormatter;
+import com.acme.edu.handlers.EventHandler;
 import com.acme.edu.writers.Writer;
 
 import java.util.ArrayList;
-
-//import java.beans.EventHandler;
-
 
 public class FormattingSavingHandler implements EventHandler {
     private ArrayList<Object> buffer = new ArrayList<>();
@@ -119,7 +118,12 @@ public class FormattingSavingHandler implements EventHandler {
     }
 
     public void releaseBuffer() {
-        Object formattedBuffer = formatter.format(buffer);
+        Object formattedBuffer = null;
+        try {
+            formattedBuffer = formatter.format(buffer);
+        } catch (FormatterException e) {
+            e.printStackTrace();
+        }
         writer.write(formattedBuffer);
     }
 
@@ -129,13 +133,11 @@ public class FormattingSavingHandler implements EventHandler {
     }
 
     private boolean tryToAddFirstElement(Object message) {
-        try {
-            if (buffer.size() == 0) {
-                buffer.add(message);
-                return true;
-            }
-        } catch (NullPointerException e) {
-            e.printStackTrace();
+        if (message == null) return false;
+
+        if (buffer.size() == 0) {
+            buffer.add(message);
+            return true;
         }
         return false;
     }

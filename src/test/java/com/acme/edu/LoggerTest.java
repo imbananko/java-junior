@@ -1,7 +1,9 @@
 package com.acme.edu;
 
+import com.acme.edu.exceptions.FormatterException;
 import com.acme.edu.formatters.AbstractFormatter;
 import com.acme.edu.formatters.ConsoleFormatter;
+import com.acme.edu.handlers.FormattingSavingHandler;
 import com.acme.edu.writers.ConsoleWriter;
 import com.acme.edu.writers.Writer;
 import org.junit.Before;
@@ -153,7 +155,11 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         // endregion
 
         //region then
-        verify(mockedFormatter).format(anyObject());
+        try {
+            verify(mockedFormatter).format(anyObject());
+        } catch (FormatterException e) {
+            e.printStackTrace();
+        }
         verify(mockedWriter).write(anyObject());
         //endregion
     }
@@ -286,7 +292,12 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         // endregion
 
         // region act
-        String formatted = formatter.format(list).toString();
+        String formatted = null;
+        try {
+            formatted = formatter.format(list).toString();
+        } catch (FormatterException e) {
+            e.printStackTrace();
+        }
         // endregion
 
         //region then

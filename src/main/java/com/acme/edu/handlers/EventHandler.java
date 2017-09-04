@@ -1,10 +1,7 @@
-package com.acme.edu;
+package com.acme.edu.handlers;
 
 import java.util.ArrayList;
 
-/**
- * Created by eugene on 31/08/17.
- */
 public interface EventHandler {
     void handleEvent(String msg);
     void handleEvent(Integer msg);
