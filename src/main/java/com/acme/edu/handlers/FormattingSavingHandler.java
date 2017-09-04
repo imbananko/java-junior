@@ -10,8 +10,8 @@ import java.util.ArrayList;
 
 public class FormattingSavingHandler implements EventHandler {
     private ArrayList<Object> buffer = new ArrayList<>();
-    private int previousIndex;
-    private int stringMultiplier;
+    private int previousIndex = 0;
+    private int stringMultiplier = 1;
 
     private Writer writer;
     private AbstractFormatter formatter;
@@ -19,8 +19,6 @@ public class FormattingSavingHandler implements EventHandler {
     public FormattingSavingHandler(Writer writer, AbstractFormatter formatter) {
         this.writer = writer;
         this.formatter = formatter;
-        previousIndex = 0;
-        stringMultiplier = 1;
     }
 
     @Override
