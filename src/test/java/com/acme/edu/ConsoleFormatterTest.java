@@ -87,4 +87,28 @@ public class ConsoleFormatterTest {
 
     }
 
+    @Test
+    public void shouldHandleExceptionCorrectlyWhenBufferNull() {
+        // region given
+        String message = null;
+        ArrayList<Object> buffer = null;
+        //endregion
+
+        //region act
+        try {
+
+            mockedConsoleFormatter.format(null);
+        } catch (FormatterException e) {
+            buffer = e.getBuffer();
+            message = e.getMessage();
+        }
+        //endregion
+
+        //region then
+        assertEquals(message, "Buffer cannot be null");
+        assertEquals(buffer, null);
+        //endregion
+
+    }
+
 }
