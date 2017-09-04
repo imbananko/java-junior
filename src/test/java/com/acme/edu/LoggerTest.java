@@ -1,23 +1,19 @@
 package com.acme.edu;
 
 import com.acme.edu.exceptions.FormatterException;
+import com.acme.edu.exceptions.WriterException;
 import com.acme.edu.formatters.AbstractFormatter;
-import com.acme.edu.formatters.ConsoleFormatter;
 import com.acme.edu.handlers.FormattingSavingHandler;
 import com.acme.edu.writers.ConsoleWriter;
 import com.acme.edu.writers.Writer;
 import org.junit.Before;
 import org.junit.Test;
-import java.util.ArrayList;
 
-import static org.fest.assertions.Assertions.assertThat;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
-import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyObject;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
 
 public class LoggerTest implements SysoutCaptureAndAssertionAbility {
 
@@ -151,7 +147,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     }
 
     @Test
-    public void shouldCallFormatAndWriteOnRelease() {
+    public void shouldCallFormatAndWriteOnRelease() throws WriterException {
         // region act
         context.releaseBuffer();
         // endregion
@@ -284,31 +280,10 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         //endregion
     }
 
-    @Test
-    public void shouldReturnFormattedObjectWhenFormat() {
-        // region given
-        AbstractFormatter formatter = new ConsoleFormatter();
-        ArrayList<Integer> list = new ArrayList<>();
-        list.add(5);
-        list.add(2);
-        // endregion
 
-        // region act
-        String formatted = null;
-        try {
-            formatted = formatter.format(list).toString();
-        } catch (FormatterException e) {
-            e.printStackTrace();
-        }
-        // endregion
-
-        //region then
-        assertEquals(formatted, "5\n2" );
-        //endregion
-    }
 
     @Test
-    public void shouldWriteToConsoleWhenWrite() {
+    public void shouldWriteToConsoleWhenWrite() throws WriterException {
         // region given
         Writer writer = new ConsoleWriter();
         // endregion
@@ -322,31 +297,6 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         //endregion
     }
 
-    @Test (expected = FormatterException.class)
-    public void shouldThrowFormatterExceptionWhenFormatNullBuffer() throws FormatterException {
-        //region given
-        ConsoleFormatter mockedConsoleFormatter = mock(ConsoleFormatter.class);
-        when(mockedConsoleFormatter.format(any())).thenCallRealMethod();
-        //endregion
-
-        //region act
-        mockedConsoleFormatter.format(null);
-        //endregion
-
-    }
-
-    @Test (expected = FormatterException.class)
-    public void shouldThrowFormatterExceptionWhenFormatEmptyBuffer() throws FormatterException {
-        //region given
-        ConsoleFormatter mockedConsoleFormatter = mock(ConsoleFormatter.class);
-        when(mockedConsoleFormatter.format(any())).thenCallRealMethod();
-        //endregion
-
-        //region act
-        mockedConsoleFormatter.format(new ArrayList<Object>());
-        //endregion
-
-    }
     
 
 }

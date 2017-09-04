@@ -10,7 +10,6 @@ public class FormatterException extends Exception {
     }
 
     public FormatterException(String message, ArrayList buffer) {
-
         super(message);
         this.buffer = buffer;
     }

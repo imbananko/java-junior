@@ -1,6 +1,7 @@
 package com.acme.edu.handlers;
 
 import com.acme.edu.exceptions.FormatterException;
+import com.acme.edu.exceptions.WriterException;
 import com.acme.edu.formatters.AbstractFormatter;
 import com.acme.edu.handlers.EventHandler;
 import com.acme.edu.writers.Writer;
@@ -124,7 +125,12 @@ public class FormattingSavingHandler implements EventHandler {
         } catch (FormatterException e) {
             e.printStackTrace();
         }
-        writer.write(formattedBuffer);
+
+        try {
+            writer.write(formattedBuffer);
+        } catch (WriterException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
