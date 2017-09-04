@@ -28,8 +28,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         mockedFormatter = mock(AbstractFormatter.class);
         formattingSavingHandler = new FormattingSavingHandler(mockedWriter, mockedFormatter);
         context = new Context(formattingSavingHandler);
-        resetOut();
-        captureSysout();
+
     }
 
     @Test
@@ -279,24 +278,4 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         assertTrue(formattingSavingHandler.getBuffer().contains("string2"));
         //endregion
     }
-
-
-
-    @Test
-    public void shouldWriteToConsoleWhenWrite() throws WriterException {
-        // region given
-        Writer writer = new ConsoleWriter();
-        // endregion
-
-        // region act
-        writer.write("Tested");
-        // endregion
-
-        //region then
-        assertSysoutContains("Tested");
-        //endregion
-    }
-
-    
-
 }
