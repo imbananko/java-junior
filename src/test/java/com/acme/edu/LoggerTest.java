@@ -15,17 +15,19 @@ import static org.mockito.Matchers.anyObject;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 
-public class contextTest implements SysoutCaptureAndAssertionAbility {
+public class LoggerTest implements SysoutCaptureAndAssertionAbility {
 
-    Writer mockedWriter;
-    AbstractFormatter mockedFormatter;
-    Context context;
+    private Writer mockedWriter;
+    private AbstractFormatter mockedFormatter;
+    private Context context;
+    private FormattingSavingHandler formattingSavingHandler;
 
     @Before
     public void setUp() {
         mockedWriter = mock(Writer.class);
         mockedFormatter = mock(AbstractFormatter.class);
-        context = new context(mockedWriter, mockedFormatter);
+        formattingSavingHandler = new FormattingSavingHandler(mockedWriter, mockedFormatter);
+        context = new Context(formattingSavingHandler);
         resetOut();
         captureSysout();
     }
@@ -41,8 +43,8 @@ public class contextTest implements SysoutCaptureAndAssertionAbility {
         // endregion
 
         //region then
-        assertEquals(1, context.buffer.size());
-        assertTrue(context.buffer.contains(5));
+        assertEquals(1, formattingSavingHandler.getBuffer().size());
+        assertTrue(formattingSavingHandler.getBuffer().contains(5));
         //endregion
     }
 
@@ -57,8 +59,8 @@ public class contextTest implements SysoutCaptureAndAssertionAbility {
         // endregion
 
         //region then
-        assertEquals(1, context.buffer.size());
-        assertTrue(context.buffer.contains("String to log"));
+        assertEquals(1, formattingSavingHandler.getBuffer().size());
+        assertTrue(formattingSavingHandler.getBuffer().contains("String to log"));
         //endregion
     }
 
@@ -73,8 +75,8 @@ public class contextTest implements SysoutCaptureAndAssertionAbility {
         // endregion
 
         //region then
-        assertEquals(1, context.buffer.size());
-        assertTrue(context.buffer.contains(true));
+        assertEquals(1, formattingSavingHandler.getBuffer().size());
+        assertTrue(formattingSavingHandler.getBuffer().contains(true));
         //endregion
     }
 
@@ -89,8 +91,8 @@ public class contextTest implements SysoutCaptureAndAssertionAbility {
         // endregion
 
         //region then
-        assertEquals(1, context.buffer.size());
-        assertTrue(context.buffer.contains(objectMessage));
+        assertEquals(1, formattingSavingHandler.getBuffer().size());
+        assertTrue(formattingSavingHandler.getBuffer().contains(objectMessage));
         //endregion
     }
 
@@ -105,8 +107,8 @@ public class contextTest implements SysoutCaptureAndAssertionAbility {
         // endregion
 
         //region then
-        assertEquals(1, context.buffer.size());
-        assertTrue(context.buffer.contains(byteMessage));
+        assertEquals(1, formattingSavingHandler.getBuffer().size());
+        assertTrue(formattingSavingHandler.getBuffer().contains(byteMessage));
         //endregion
     }
 
@@ -121,10 +123,10 @@ public class contextTest implements SysoutCaptureAndAssertionAbility {
         // endregion
 
         //region then
-        assertEquals(3, context.buffer.size());
-        assertTrue(context.buffer.contains(1));
-        assertTrue(context.buffer.contains(2));
-        assertTrue(context.buffer.contains(3));
+        assertEquals(3, formattingSavingHandler.getBuffer().size());
+        assertTrue(formattingSavingHandler.getBuffer().contains(1));
+        assertTrue(formattingSavingHandler.getBuffer().contains(2));
+        assertTrue(formattingSavingHandler.getBuffer().contains(3));
         //endregion
     }
 
@@ -139,8 +141,8 @@ public class contextTest implements SysoutCaptureAndAssertionAbility {
         // endregion
 
         //region then
-        assertEquals(1, context.buffer.size());
-        assertTrue(context.buffer.contains('c'));
+        assertEquals(1, formattingSavingHandler.getBuffer().size());
+        assertTrue(formattingSavingHandler.getBuffer().contains('c'));
         //endregion
     }
 
@@ -172,8 +174,8 @@ public class contextTest implements SysoutCaptureAndAssertionAbility {
         // endregion
 
         //region then
-        assertEquals(1, context.buffer.size());
-        assertTrue(context.buffer.contains(sum));
+        assertEquals(1, formattingSavingHandler.getBuffer().size());
+        assertTrue(formattingSavingHandler.getBuffer().contains(sum));
         //endregion
     }
 
@@ -193,8 +195,8 @@ public class contextTest implements SysoutCaptureAndAssertionAbility {
         // endregion
 
         //region then
-        assertEquals(1, context.buffer.size());
-        assertTrue(context.buffer.contains(sum));
+        assertEquals(1, formattingSavingHandler.getBuffer().size());
+        assertTrue(formattingSavingHandler.getBuffer().contains(sum));
         //endregion
     }
 
@@ -212,8 +214,8 @@ public class contextTest implements SysoutCaptureAndAssertionAbility {
         // endregion
 
         //region then
-        assertEquals(1, context.buffer.size());
-        assertTrue(context.buffer.contains(result));
+        assertEquals(1, formattingSavingHandler.getBuffer().size());
+        assertTrue(formattingSavingHandler.getBuffer().contains(result));
         //endregion
     }
 
@@ -230,9 +232,9 @@ public class contextTest implements SysoutCaptureAndAssertionAbility {
         // endregion
 
         //region then
-        assertEquals(2, context.buffer.size());
-        assertTrue(context.buffer.contains(700));
-        assertTrue(context.buffer.contains(Integer.MAX_VALUE));
+        assertEquals(2, formattingSavingHandler.getBuffer().size());
+        assertTrue(formattingSavingHandler.getBuffer().contains(700));
+        assertTrue(formattingSavingHandler.getBuffer().contains(Integer.MAX_VALUE));
         //endregion
     }
 
@@ -249,9 +251,9 @@ public class contextTest implements SysoutCaptureAndAssertionAbility {
         // endregion
 
         //region then
-        assertEquals(2, context.buffer.size());
-        assertTrue(context.buffer.contains((byte)10));
-        assertTrue(context.buffer.contains(Byte.MAX_VALUE));
+        assertEquals(2, formattingSavingHandler.getBuffer().size());
+        assertTrue(formattingSavingHandler.getBuffer().contains((byte)10));
+        assertTrue(formattingSavingHandler.getBuffer().contains(Byte.MAX_VALUE));
         //endregion
     }
 
@@ -268,9 +270,9 @@ public class contextTest implements SysoutCaptureAndAssertionAbility {
         // endregion
 
         //region then
-        assertEquals(2, context.buffer.size());
-        assertTrue(context.buffer.contains("string1"));
-        assertTrue(context.buffer.contains("string2"));
+        assertEquals(2, formattingSavingHandler.getBuffer().size());
+        assertTrue(formattingSavingHandler.getBuffer().contains("string1"));
+        assertTrue(formattingSavingHandler.getBuffer().contains("string2"));
         //endregion
     }
 
@@ -307,5 +309,3 @@ public class contextTest implements SysoutCaptureAndAssertionAbility {
         //endregion
     }
 }
-
-

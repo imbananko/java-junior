@@ -3,6 +3,7 @@ package com.acme.edu;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import static java.util.Arrays.asList;
 
 /**
@@ -20,6 +21,9 @@ public class Context {
     }
 
     public void logEvent(String msg) {
+        handlers.forEach(h -> h.handleEvent(msg));
+    }
+    public void logEvent(int[] msg) {
         handlers.forEach(h -> h.handleEvent(msg));
     }
     public void logEvent(Integer msg) {

@@ -3,19 +3,18 @@ package com.acme.edu;
 import com.acme.edu.formatters.AbstractFormatter;
 import com.acme.edu.writers.Writer;
 
-//import java.beans.EventHandler;
 import java.util.ArrayList;
-import java.util.EventListener;
-import java.util.List;
+
+//import java.beans.EventHandler;
 
 
 public class FormattingSavingHandler implements EventHandler {
-    ArrayList<Object> buffer = new ArrayList<>();
-    int previousIndex;
-    int stringMultiplier;
+    private ArrayList<Object> buffer = new ArrayList<>();
+    private int previousIndex;
+    private int stringMultiplier;
 
-    Writer writer;
-    AbstractFormatter formatter;
+    private Writer writer;
+    private AbstractFormatter formatter;
 
     public FormattingSavingHandler(Writer writer, AbstractFormatter formatter) {
         this.writer = writer;
@@ -118,6 +117,11 @@ public class FormattingSavingHandler implements EventHandler {
         writer.write(formattedBuffer);
     }
 
+    @Override
+    public ArrayList<Object> getBuffer() {
+        return buffer;
+    }
+
     private boolean tryToAddFirstElement(Object message) {
         if (buffer.size() == 0) {
             buffer.add(message);
@@ -153,6 +157,11 @@ public class FormattingSavingHandler implements EventHandler {
 
     @Override
     public void handleEvent(Object msg) {
+        log(msg);
+    }
+
+    @Override
+    public void handleEvent(int[] msg) {
         log(msg);
     }
 }
