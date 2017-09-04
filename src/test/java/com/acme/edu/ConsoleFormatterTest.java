@@ -64,16 +64,16 @@ public class ConsoleFormatterTest {
     }
 
     @Test
-    public void shouldHandleExceptionCorrectlyWhenBufferNullOrBufferEmpty() {
+    public void shouldHandleExceptionCorrectlyWhenBufferEmpty() {
         // region given
         String message = null;
-        ArrayList<Object> buffer = null ;
+        ArrayList<Object> buffer = null;
         //endregion
 
         //region act
         try {
 
-            mockedConsoleFormatter.format(null);
+            mockedConsoleFormatter.format(new ArrayList<>());
         } catch (FormatterException e) {
             buffer = e.getBuffer();
             message = e.getMessage();
@@ -81,10 +81,9 @@ public class ConsoleFormatterTest {
         //endregion
 
         //region then
-        assertEquals(message, "Buffer cannot be null");
-        assertEquals(buffer,null);
+        assertEquals(message, "Cannot format empty buffer");
+        assertEquals(buffer, new ArrayList<>());
         //endregion
-
 
     }
 
